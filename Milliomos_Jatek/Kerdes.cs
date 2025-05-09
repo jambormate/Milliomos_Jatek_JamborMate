@@ -29,7 +29,30 @@ namespace Milliomos_Jatek
 		public string Helyes_valasz { get => helyes_valasz; set => helyes_valasz = value; }
 		public string Kategoria { get => kategoria; set => kategoria = value; }
 
+		//static void Main(string[] args)
+		//{
+		//	string[] valaszok = [];
 
+		//	Beolvasas("kerdes.txt", valaszok);
+
+		//	foreach (var item in valaszok)
+		//	{
+		//		Console.WriteLine(item);
+		//	}
+		//}
+
+		//static void Beolvasas(string filenev, string[] valaszok)
+		//{
+		//	StreamReader sr = new StreamReader(filenev);
+
+		//	while (!sr.EndOfStream)
+		//	{
+		//		string sor = sr.ReadLine();
+		//		string[] szavak = sor.Split(';');
+				
+		//	}
+		//}
+		//van egy sejtésem hogy ez nem működik
 
 		//public override string? ToString()
 		//{
