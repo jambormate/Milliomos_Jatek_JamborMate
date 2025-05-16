@@ -33,11 +33,54 @@
                 sorkerdesek.Add(kerdes);
             }
         }
-		static void Main(string[] args)
+        static void Jatek()
+        {
+            int[] nyeremenyek = { 10000, 20000, 50000, 100000, 250000, 500000, 750000, 1000000, 1500000, 2000000, 5000000, 10000000, 25000000, 50000000 };
+            int[] garantaltSzintek = { 5, 10, 15 };
+            int aktualisSzint = 1;
+            int elertOsszeg = 0;
+            Random rnd = new Random();
+
+            while (aktualisSzint <= nyeremenyek.Length)
+            {
+                var szintKerdesek = kerdesek.Where(k => k.Kodszam == aktualisSzint).ToList();
+                var kerdes = szintKerdesek[rnd.Next(szintKerdesek.Count)];
+
+                Console.WriteLine($"\nKérdés {aktualisSzint}: {kerdes.Question}");
+                for (int i = 0; i < 4; i++)
+                    Console.WriteLine($"{(char)('A' + i)}: {kerdes.Valasz[i]}");
+
+                //Console.WriteLine(kerdes.Helyes_valasz);
+
+                Console.Write("Válasz: ");
+                string valasz = Console.ReadLine().ToUpper();
+
+                if (valasz != kerdes.Helyes_valasz.ToUpper())
+                {
+                    Console.WriteLine("Sajnos hibás válasz, vége a játéknak.");
+
+                    int garantaltOsszeg = 0;
+                    foreach (var szint in garantaltSzintek)
+                    {
+                        if (aktualisSzint > szint)
+                            garantaltOsszeg = nyeremenyek[szint - 1];
+                    }
+                    Console.WriteLine($"Elért nyereményed: {garantaltOsszeg} Ft");
+                    return;
+                }
+
+                elertOsszeg = nyeremenyek[aktualisSzint - 1];
+                Console.WriteLine($"Helyes válasz! Jutalmad: {elertOsszeg} Ft");
+
+                aktualisSzint++;
+            }
+
+            Console.WriteLine("\nGratulálok! Megnyerted a játékot! Maga Milliomos lett!!!!!");
+            Console.WriteLine($"Összes nyereményed: {elertOsszeg} Ft");
+        }
+        static void Main(string[] args)
 		{
 			Beolvasas();
-            int[] nyeremenyek = { 10000, 20000, 50000, 100000, 250000, 500000, 750000, 1000000, 1500000, 2000000, 5000000, 10000000, 25000000, 50000000 };
-            int[] garantaltSzintek = { 4, 9, 14 };
             Console.WriteLine("Üdvözlöm a kedves versenyzőt a 'legyen ön is milliomos' játékban!");
 
             var sorkerdes = sorkerdesek[new Random().Next(sorkerdesek.Count)];
@@ -57,6 +100,7 @@
             }
 
             Console.WriteLine("Helyes a sorrend!!!!! Kezdődhet a játék!!!!!");
+            Jatek();
         }
     }
 }
